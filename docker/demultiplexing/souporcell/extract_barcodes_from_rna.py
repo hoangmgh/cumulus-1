@@ -11,4 +11,4 @@ data = io.read_input(argv[1])
 data.filter_data(min_genes=int(argv[3]))
 
 with open(argv[2], "w") as fout:
-	fout.write('\n'.join([x + '-1' for x in data.obs_names]) + '\n')
+	fout.write('\n'.join( data.obs_names) + '\n')
