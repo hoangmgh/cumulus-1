@@ -175,6 +175,8 @@ task run_souporcell {
         check_call(souporcell_call_args)
 
         CODE
+        
+        mkdir result
         strato sync --backend ~{backend} -m result "~{output_directory}/~{sample_id}"
 
     }
