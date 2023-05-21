@@ -175,8 +175,9 @@ task run_souporcell {
         check_call(souporcell_call_args)
 
         CODE
+        strato sync --backend ~{backend} -m result "~{output_directory}/~{sample_id}"
+
     }
-    strato sync --backend ~{backend} -m result "~{output_directory}/~{sample_id}"
     output {
 
         File souporcell_cluster_tsv = "result/clusters.tsv"
