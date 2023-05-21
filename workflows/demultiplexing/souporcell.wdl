@@ -176,11 +176,9 @@ task run_souporcell {
 
         CODE
     }
-
+    strato sync --backend ~{backend} -m result "~{output_directory}/~{sample_id}"
     output {
-        File ref_mtx = "result/ref.mtx"
-        File alt_mtx = "result/alt.mtx"
-        File merged_vcf = "result/souporcell_merged_vcf.vcf"
+
         File souporcell_cluster_tsv = "result/clusters.tsv"
         File souporcell_genotypes_vcf = "result/cluster_genotypes.vcf"
         File monitoringLog = "monitoring.log"
