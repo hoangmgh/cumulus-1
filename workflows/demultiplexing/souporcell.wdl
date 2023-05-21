@@ -22,7 +22,6 @@ workflow souporcell {
         File? common_variants
         # Skip remap step. Only recommended in non denovo mode or common variants are provided
         Boolean skip_remap
-        # A comma-separated list of donor names for renaming clusters achieved by souporcell
         String donor_rename
         # Only demultiplex cells/nuclei with at least <min_num_genes> expressed genes
         Int min_num_genes
@@ -142,7 +141,7 @@ task run_souporcell {
         python <<CODE
         from subprocess import check_call
 
-        souporcell_call_args = ['souporcell_pipeline.py', '-i', '~{input_bam}', '-b', 'result/~{sample_id}.barcodes.tsv', '-f', 'genome_ref/fasta/genome.fa', '-t', '~{num_cpu}', '-o', 'result', '-k', '~{num_clusters}','--ignore']
+        souporcell_call_args = ['souporcell_pipeline.py', '-i', '~{input_bam}', '-b', 'result/~{sample_id}.barcodes.tsv', '-f', 'genome_ref/fasta/genome.fa', '-t', '~{num_cpu}', '-o', 'result', '-k', '~{num_clusters}','--ignore','True']
 
         if '~{de_novo_mode}' == 'false':
             assert '~{ref_genotypes}' != '', "Reference mode must have a reference genotype vcf file provided!"
