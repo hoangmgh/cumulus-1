@@ -137,7 +137,7 @@ task run_souporcell {
 
         mkdir result
         python /opt/extract_barcodes_from_rna.py ~{input_rna} result/~{sample_id}.barcodes.tsv ~{min_num_genes}
-
+        head result/~{sample_id}.barcodes.tsv
         python <<CODE
         from subprocess import check_call
 
