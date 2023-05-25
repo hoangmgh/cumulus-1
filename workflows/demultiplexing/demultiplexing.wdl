@@ -8,6 +8,7 @@ workflow demultiplexing {
     input {
         # Input CSV file describing metadata of RNA and hashtag/genetic data pairing.
         File input_sample_sheet
+        File barcode_file
         # This is the output directory (gs url + path) for all results. There will be one folder per RNA-hashtag/genetic data pair under this directory.
         String output_directory
         # Reference genome name
@@ -154,6 +155,7 @@ workflow demultiplexing {
                 call soc.souporcell as souporcell {
                     input:
                         sample_id = pooling_id,
+                        barcode_file = barcode_file,
                         output_directory = output_directory_stripped,
                         input_rna = Config.id2rna[pooling_id],
                         input_bam = Config.id2tag[pooling_id],
