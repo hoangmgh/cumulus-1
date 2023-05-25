@@ -3,8 +3,8 @@ version 1.0
 workflow souporcell {
     input {
         # Sample ID
-        File barcode_file 
         String sample_id
+        File barcode_file 
         # Output directory (gs url + path)
         String output_directory
         # Link to a RNA count matrix
