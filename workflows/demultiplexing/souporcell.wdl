@@ -3,6 +3,7 @@ version 1.0
 workflow souporcell {
     input {
         # Sample ID
+        File barcode_file 
         String sample_id
         # Output directory (gs url + path)
         String output_directory
@@ -51,6 +52,7 @@ workflow souporcell {
 
     call run_souporcell {
         input:
+            barcode_file = barcode_file,
             sample_id = sample_id,
             output_directory = output_directory,
             input_rna = input_rna,
@@ -102,6 +104,7 @@ workflow souporcell {
 
 task run_souporcell {
     input {
+        File barcode_file
         String sample_id
         String output_directory
         File input_rna
@@ -136,12 +139,10 @@ task run_souporcell {
         rm "~{genome}"
 
         mkdir result
-        python /opt/extract_barcodes_from_rna.py ~{input_rna} result/~{sample_id}.barcodes.tsv ~{min_num_genes}
-        head result/~{sample_id}.barcodes.tsv
         python <<CODE
         from subprocess import check_call
 
-        souporcell_call_args = ['souporcell_pipeline.py', '-i', '~{input_bam}', '-b', 'result/~{sample_id}.barcodes.tsv', '-f', 'genome_ref/fasta/genome.fa', '-t', '~{num_cpu}', '-o', 'result', '-k', '~{num_clusters}','--ignore','True']
+        souporcell_call_args = ['souporcell_pipeline.py', '-i', '~{input_bam}', '-b', '~{barcode_file}' , '-f', 'genome_ref/fasta/genome.fa', '-t', '~{num_cpu}', '-o', 'result', '-k', '~{num_clusters}','--ignore','True']
 
         if '~{de_novo_mode}' == 'false':
             assert '~{ref_genotypes}' != '', "Reference mode must have a reference genotype vcf file provided!"
