@@ -26,8 +26,8 @@ workflow souporcell {
         String donor_rename
         # Only demultiplex cells/nuclei with at least <min_num_genes> expressed genes
         Int min_num_genes
-        Int? min_ref
-        Int? min_alt
+        Int min_ref
+        Int min_alt
         # Souporcell version to use
         String souporcell_version
         # Which docker registry to use
@@ -75,8 +75,8 @@ workflow souporcell {
             preemptible = preemptible,
             awsQueueArn = awsQueueArn,
             backend = backend,
-            min_ref=min_ref,
-            min_alt=min_alt
+            min_ref = min_ref,
+            min_alt = min_alt
     }
 
     call match_donors {
