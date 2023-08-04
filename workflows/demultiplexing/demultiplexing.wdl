@@ -17,7 +17,8 @@ workflow demultiplexing {
         String demultiplexing_algorithm = "souporcell"
         # Only demultiplex cells/nuclei with at least <min_num_genes> expressed genes
         Int min_num_genes = 100
-
+        Int? min_ref
+        Int? min_alt
         # Which docker registry to use: quay.io/cumulus (default) or cumulusprod
         String docker_registry = "quay.io/cumulus"
         # Number of preemptible tries
@@ -72,7 +73,7 @@ workflow demultiplexing {
         Int souporcell_disk_space = 500
         # Memory size string for souporcell per pair
         String souporcell_memory = "120G"
-
+        
         # For popscle (demuxlet/freemuxlet)
         # Minimum mapping quality to consider (lower MQ will be ignored) [default: 20]
         Int? popscle_min_MQ
@@ -175,7 +176,9 @@ workflow demultiplexing {
                         zones = zones,
                         preemptible = preemptible,
                         awsQueueArn = awsQueueArn,
-                        backend = backend
+                        backend = backend,
+                        min_ref = min_ref,
+                        min_alt = min_alt
                 }
             }
 
