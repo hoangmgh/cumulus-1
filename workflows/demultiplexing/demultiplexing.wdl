@@ -17,8 +17,8 @@ workflow demultiplexing {
         String demultiplexing_algorithm = "souporcell"
         # Only demultiplex cells/nuclei with at least <min_num_genes> expressed genes
         Int min_num_genes = 100
-        Int? min_ref
-        Int? min_alt
+        Int min_ref = 20
+        Int min_alt = 20
         # Which docker registry to use: quay.io/cumulus (default) or cumulusprod
         String docker_registry = "quay.io/cumulus"
         # Number of preemptible tries
