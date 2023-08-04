@@ -119,6 +119,8 @@ task run_souporcell {
         Boolean skip_remap
         Boolean de_novo_mode
         Int min_num_genes
+        Int min_ref
+        Int min_alt
         Int num_clusters
 
         String version
